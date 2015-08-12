@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'polls',
     'loginsys',
-    'registration',
     'mbrc_profile',
 )
 
@@ -113,6 +112,3 @@ STATICFILES_DIRS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  "templates"),
 )
-
-ACCOUNT_ACTIVATION_DAYS = 2
-REGISTRATION_AUTO_LOGIN = True
