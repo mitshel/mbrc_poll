@@ -1,0 +1,26 @@
+{% extends 'main.html' %}
+
+{% block login %}
+    <div class="large-offset-3 large-6 columns">
+        <p></p>
+        <h3>Подтверждение регистрации номера телефона для пользователя {{ username }}.</h3>
+        {%  if errorvalue %}
+            <div style="background-color: lightpink">
+            <p style="text-align: center">{{ errorvalue }}</p>
+            </div>
+        {% endif %}
+        {%  if infovalue %}
+            <div style="background-color: lightblue">
+            <p style="text-align: center">{{ infovalue }}</p>
+            </div>
+        {% endif %}
+        <p>Пожалуйста, введите код подтверждения Вашего номера телефона {{ tel }}, который мы Вам направили {{ last_sms_time }} по SMS.</p>
+        <form action="/auth/sms_confirm/" method="post">
+            {% csrf_token %}
+            <label for="sms_code">Введите полученный по SMS код:</label>
+            <input type="text" name="sms_code" id="sms_code">
+            <input class="button" type="submit" value="Подтвердить">
+            <button formaction="/auth/sms_reconfirm/">Отправить SMS повторно</button>
+        </form>
+    </div>
+{% endblock %}

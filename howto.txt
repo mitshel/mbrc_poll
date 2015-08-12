@@ -1,0 +1,2 @@
+## Установка django-registration
+Примеры, описания находятся на сайте <https://django-registration-redux.readthedocs.org/en/latest/quickstart.html>

@@ -1,0 +1,3 @@
+admin user: mitshel
+admin email: mitshel@mail.ru
+admin password: madlenka

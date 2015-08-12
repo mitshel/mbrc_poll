@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% block login %}
+    <div class="large-offset-3 large-6 columns">
+    <p></p>
+    <h2>Вход в систему.</h2>
+        <p>Пожалуйста, выполните вход в систему для прохождения анкетирования.</p>
+        <form action="/auth/login/" method="post">
+            {% csrf_token %}
+            <label for="username">Ваш логин (e-mail):</label>
+            <input type="text" name="username" id="username">
+            <label for="password">Пароль</label>
+            <input type="password" name="password" id="password">
+            {% if login_error %}
+                <label class="error">{{ login_error }}</label>
+            {% endif %}
+            <input class="button" type="submit" value="Войти">
+        </form>
+    </div>
+{% endblock %}
