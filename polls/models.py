@@ -11,7 +11,7 @@ class specialize(models.Model):
         return self.name
 
 class UserProfile(models.Model):
-    uid = models.ForeignKey(User, null=True)
+    uid = models.OneToOneField(User, null=True)
     specialize = models.ForeignKey(specialize, null=True)
     tel = models.CharField(max_length=10)
     employment = models.CharField(max_length=64)
