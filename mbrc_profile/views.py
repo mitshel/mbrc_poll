@@ -199,6 +199,7 @@ def email_confirm(request, activation_key):
         user.save()
 
         args['activation_success']=1
+        args['username_confirm']=user.username
         return render_to_response('email_confirm_info.html',args)
     else:
         args['activation_failed']=1
