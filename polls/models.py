@@ -2,25 +2,9 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from mbrc_profile.models import specialize, UserProfile
 
 # Create your models here.
-class specialize(models.Model):
-    name = models.CharField(max_length=64)
-
-    def __str__(self):
-        return self.name
-
-class UserProfile(models.Model):
-    uid = models.OneToOneField(User, null=True)
-    specialize = models.ForeignKey(specialize, null=True)
-    tel = models.CharField(max_length=10)
-    employment = models.CharField(max_length=64)
-    position = models.CharField(max_length=64)
-    ranks = models.CharField(max_length=256)
-    last_sms = models.CharField(max_length=6, null=True)
-    last_sms_time = models.DateTimeField(null=True)
-    is_confirmed = models.BooleanField(default=False)
-
 class polls(models.Model):
     """ Класс опроса """
     name = models.CharField(max_length=64)

@@ -48,8 +48,8 @@
       <exported-key name="#FAKE_auth_user_groups_2" table="auth_user_groups" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_auth_user_user_permissions_2" table="auth_user_user_permissions" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_django_admin_log_1" table="django_admin_log" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_mbrc_profile_userprofile_1" table="mbrc_profile_userprofile" schema="" catalog="" columns="uid_id"/>
       <exported-key name="#FAKE_polls_polls_results_1" table="polls_polls_results" schema="" catalog="" columns="uid_id"/>
-      <exported-key name="#FAKE_polls_userprofile_1" table="polls_userprofile" schema="" catalog="" columns="uid_id"/>
       <exported-key name="#FAKE_registration_registrationprofile_1" table="registration_registrationprofile" schema="" catalog="" columns="user_id"/>
     </table>
     <table name="auth_user_groups" schema="" catalog="" type="TABLE">
@@ -115,13 +115,38 @@
       <column name="name" sqlType="VARCHAR(50)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
     </table>
+    <table name="mbrc_profile_specialize" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_mbrc_profile_userprofile_2" table="mbrc_profile_userprofile" schema="" catalog="" columns="specialize_id"/>
+      <exported-key name="#FAKE_polls_polls_1" table="polls_polls" schema="" catalog="" columns="specialize_id"/>
+    </table>
+    <table name="mbrc_profile_userprofile" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="tel" sqlType="VARCHAR(10)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="employment" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="position" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="ranks" sqlType="VARCHAR(256)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="last_sms" sqlType="VARCHAR(6)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="last_sms_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="is_confirmed" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="specialize_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="uid_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
+      <column name="activation_key" sqlType="VARCHAR(40)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="key_send_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_mbrc_profile_userprofile_1" columns="uid_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_mbrc_profile_userprofile_2" columns="specialize_id" ref-table="mbrc_profile_specialize" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="mbrc_profile_userprofile_f942ee46" unique="true" columns="specialize_id"/>
+    </table>
     <table name="polls_polls" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="name" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <column name="poll_sort" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="specialize_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_polls_polls_1" columns="specialize_id" ref-table="polls_specialize" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_polls_polls_1" columns="specialize_id" ref-table="mbrc_profile_specialize" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="#FAKE_polls_polls_questions_1" table="polls_polls_questions" schema="" catalog="" columns="poll_id"/>
       <exported-key name="#FAKE_polls_polls_results_2" table="polls_polls_results" schema="" catalog="" columns="poll_id"/>
       <index name="polls_polls_f942ee46" unique="true" columns="specialize_id"/>
@@ -176,30 +201,6 @@
       <exported-key name="#FAKE_polls_polls_answersresults_2" table="polls_polls_answersresults" schema="" catalog="" columns="poll_result_id"/>
       <index name="polls_polls_results_71422c2d" unique="true" columns="uid_id"/>
       <index name="polls_polls_results_582e9e5a" unique="true" columns="poll_id"/>
-    </table>
-    <table name="polls_specialize" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="name" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <primary-key columns="id"/>
-      <exported-key name="#FAKE_polls_polls_1" table="polls_polls" schema="" catalog="" columns="specialize_id"/>
-      <exported-key name="#FAKE_polls_userprofile_2" table="polls_userprofile" schema="" catalog="" columns="specialize_id"/>
-    </table>
-    <table name="polls_userprofile" schema="" catalog="" type="TABLE">
-      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="tel" sqlType="VARCHAR(10)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="employment" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="position" sqlType="VARCHAR(64)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="ranks" sqlType="VARCHAR(256)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="last_sms" sqlType="VARCHAR(6)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
-      <column name="is_confirmed" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
-      <column name="specialize_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
-      <column name="uid_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
-      <column name="last_sms_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
-      <primary-key columns="id"/>
-      <foreign-key name="#FAKE_polls_userprofile_1" columns="uid_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_polls_userprofile_2" columns="specialize_id" ref-table="polls_specialize" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <index name="polls_userprofile_71422c2d" unique="true" columns="uid_id"/>
-      <index name="polls_userprofile_f942ee46" unique="true" columns="specialize_id"/>
     </table>
     <table name="registration_registrationprofile" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>

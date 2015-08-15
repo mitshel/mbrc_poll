@@ -3,7 +3,7 @@
 from random import randint
 import datetime
 from django.utils import timezone
-from polls.models import UserProfile
+from mbrc_profile.models import UserProfile
 
 import urllib
 try:
@@ -30,17 +30,6 @@ def send_sms_confirmation(user_profile):
     #    api2_epochta_confirmation(user_profile.tel, user_profile.last_sms)
         return 0
 
-
-#------------------------------------------------------------------
-#--  sms 24x7 API
-#--
-sms24x7_email = "mitshel@mail.ru"
-sms24x7_password = "gluesms52"
-
-def sms24x7_confirmation(phone, code):
-    sms_string =  sms_template %(phone, code)
-    smsapi = sms24x7.smsapi(sms24x7_email, sms24x7_password)
-    smsapi.push_msg(sms_string, phone, nologin=True, sender_name='MBRC')
 
 #------------------------------------------------------------------
 #--  ePochta API

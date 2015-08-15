@@ -18,7 +18,7 @@ from django.contrib import admin
 from polls.views import *
 
 urlpatterns = [
-    url(r'^auth/', include('loginsys.urls')),
+    url(r'^auth/', include('mbrc_profile.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^hello/$',hello),
     url(r'^time/plus/(\d{1,2})/$',hours_ahead),

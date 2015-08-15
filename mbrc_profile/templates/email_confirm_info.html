@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block login %}
+    <div class="large-offset-3 large-6 columns">
+        <p></p>
+        <h3>Подтверждение регистрации для пользователя {{ username }}.</h3>
+
+            <div style="background-color: lightblue">
+            <p style="text-align: center">
+                {%  if activation_send %}
+                На Ваш электронный адрес выслано письмо с информацией о подтвержденнии регистрации.
+                Получите наше письмо и перейдите по указанной в нем ссылке для активации вашего профиля.
+                {% endif %}
+                {%  if activation_success %}
+                Активация Вашего профиля успешно пройдена. <a href="/auth/login/">Войдите</a> в систему для начала работы.
+                {% endif %}
+            </p>
+            </div>
+
+            <div style="background-color: lightpink">
+            <p style="text-align: center">
+                {%  if activation_expired %}
+                Активация невозможна. Время, выделенное на активацию Вашего профиля завершилось. Вам необходимо вновь пройти регистрацию.
+                {% endif %}
+                {%  if activation_failed %}
+                Профиль соответствующий Вашему ключу активации не существует.
+                {% endif %}
+            </p>
+            </div>
+
+    </div>
+{% endblock %}

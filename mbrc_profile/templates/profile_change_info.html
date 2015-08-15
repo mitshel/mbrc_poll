@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block login %}
+    <div class="large-offset-3 large-6 columns">
+        <p></p>
+        <h3>Изменение профиля пользователя {{ username }}.</h3>
+
+            <div style="background-color: lightblue">
+            <p style="text-align: center">
+                {%  if pwd_change_success %}
+                Пароль успешно изменен.
+                {% endif %}
+                {%  if profile_change_success %}
+                Информация Вашего профиля успешно изменена.
+                {% endif %}
+            </p>
+            </div>
+
+            <div style="background-color: lightpink">
+            <p style="text-align: center">
+                {%  if pwd_change_failed %}
+                Ошибка смены пароля.
+                {% endif %}
+                {%  if profile_change_failed %}
+                Профиль соответствующий Вашему ключу активации не существует.
+                {% endif %}
+            </p>
+            </div>
+
+    </div>
+{% endblock %}
