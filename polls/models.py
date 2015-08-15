@@ -57,3 +57,7 @@ class polls_AnswersResults(models.Model):
     question = models.ForeignKey(polls_Questions)
     open_answer = models.CharField(max_length=1024)
     closed_answer = models.CommaSeparatedIntegerField(max_length=64)
+
+class polls_code(models.Model):
+    code = models.CharField(max_length=8, null=True)
+    is_used = models.BooleanField(default=False)
