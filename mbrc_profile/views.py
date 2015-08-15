@@ -211,10 +211,7 @@ def sms_confirm(request, send_sms=0):
     user=auth.get_user(request)
     args['username']=user.username
     user_profile=UserProfile.objects.get(uid=user)
-    last_sms = int(user_profile.last_sms)
-    last_sms_time = user_profile.last_sms_time
-    args['last_sms']=int(last_sms)
-    args['last_sms_time'] = last_sms_time
+    last_sms=-1
 
     if send_sms:
         sms_result = send_sms_confirmation(user_profile)
@@ -229,6 +226,12 @@ def sms_confirm(request, send_sms=0):
 
         args['last_sms_time'] = user_profile.last_sms_time
         return render_to_response('sms_confirm.html', args)
+
+    if user_profile.last_sms is not None:
+       last_sms = int(user_profile.last_sms)
+       last_sms_time = user_profile.last_sms_time
+       args['last_sms']=int(last_sms)
+       args['last_sms_time'] = last_sms_time
 
     if request.POST:
         try:
