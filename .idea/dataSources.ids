@@ -134,6 +134,7 @@
       <column name="specialize_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <column name="uid_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <column name="activation_key" sqlType="VARCHAR(40)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="o" sqlType="VARCHAR(32)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <column name="key_send_time" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_mbrc_profile_userprofile_1" columns="uid_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
@@ -171,6 +172,12 @@
       <foreign-key name="#FAKE_polls_polls_answersresults_2" columns="poll_result_id" ref-table="polls_polls_results" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <index name="polls_polls_answersresults_7aa0f6ee" unique="true" columns="question_id"/>
       <index name="polls_polls_answersresults_fa37f13c" unique="true" columns="poll_result_id"/>
+    </table>
+    <table name="polls_polls_code" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="code" sqlType="VARCHAR(8)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
+      <column name="is_used" sqlType="BOOL" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
     </table>
     <table name="polls_polls_questions" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>

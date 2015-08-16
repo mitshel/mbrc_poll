@@ -81,13 +81,6 @@ def register(request):
                 except IntegrityError:
                     args['errorvalue']='Ошибка добавления пользователя. Пользователь %s существует.' % email
                 else:
-#                    newuser = auth.authenticate(username=email, password=pwd2)
-#                    auth.login(request, newuser)
-#                    user_profile=UserProfile.objects.get(uid=user)
-#                    args['username']=email
-#                    args['tel']=tel
-#                    args['last_sms_time'] = user_profile.last_sms_time
-#                    return render_to_response('sms_confirm.html', args)
                     args['activation_send']=1
                     return render_to_response('email_confirm_info.html', args)
             else:
@@ -105,9 +98,8 @@ def edit_profile(request):
     args['username']=user.username
     user_profile=UserProfile.objects.get(uid=user)
     args.update(csrf(request))
-    #(fields = 'tel,f,i,o,pwd1,pwd2,specialize,employment,position,ranks')
     default_data={'tel':user_profile.tel,'f':user_profile.uid.last_name,'i':user_profile.uid.first_name,'o':user_profile.o,
-                  'specialize':user_profile.specialize, 'employment':user_profile.employment,'position':user_profile.position,
+                  'specialize':user_profile.specialize_id,'employment':user_profile.employment,'position':user_profile.position,
                   'ranks':user_profile.ranks}
     query_form = ProfileForm(default_data)
     args['form'] = query_form
