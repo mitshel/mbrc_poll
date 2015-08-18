@@ -19,6 +19,7 @@ class UserProfile(models.Model):
     ranks = models.CharField(max_length=256)
     last_sms = models.CharField(max_length=6, null=True)
     last_sms_time = models.DateTimeField(null=True)
+    n_sms = models.IntegerField(default=0)
     is_confirmed = models.BooleanField(default=False)
     activation_key = models.CharField(max_length=40, blank=True)
     key_send_time = models.DateTimeField(default=timezone.now())

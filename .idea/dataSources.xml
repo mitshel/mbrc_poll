@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="4253146420">
+  <component name="DataSourceManagerImpl" format="xml" hash="2695222700">
     <data-source source="LOCAL" name="Django default" uuid="f4660aee-0e8b-4791-93a9-33cc3ec52860">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\shelepnevdv\Dropbox\Projects\PyCharm\MBRC_Poll\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\mitshel\Dropbox\Projects\PyCharm\MBRC_Poll\db.sqlite3</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xerial-sqlite-license.txt</url>

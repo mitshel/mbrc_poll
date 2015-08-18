@@ -8,7 +8,7 @@
             <div style="background-color: lightblue">
             <p style="text-align: center">
                 {%  if pwd_change_success %}
-                Пароль успешно изменен.
+                Пароль успешно изменен. Вам необходимо выполнить повторный <a href="/auth/login/">вход в систему.
                 {% endif %}
                 {%  if profile_change_success %}
                 Информация Вашего профиля успешно изменена.
@@ -23,6 +23,9 @@
                 {% endif %}
                 {%  if profile_change_failed %}
                 Профиль соответствующий Вашему ключу активации не существует.
+                {% endif %}
+                {%  if profile_need_logon %}
+                Для изменения профиля необходимо выполнить <a href="/auth/login/">вход в систему</a>.
                 {% endif %}
             </p>
             </div>

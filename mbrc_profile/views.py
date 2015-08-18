@@ -2,7 +2,7 @@
 
 from django.shortcuts import render_to_response, redirect
 from django.contrib import auth
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AnonymousUser
 from django.core.context_processors import csrf
 from .forms import RegForm, ProfileForm, PasswordForm
 from django.db  import IntegrityError
@@ -137,7 +137,6 @@ def edit_profile(request):
 def change_password(request):
     args = {}
     user=auth.get_user(request)
-    args['username']=user.username
     user_profile=UserProfile.objects.get(uid=user)
     args.update(csrf(request))
     args['form'] = PasswordForm()
@@ -157,6 +156,7 @@ def change_password(request):
 
                 user_profile.uid.set_password(pwd1)
                 user_profile.uid.save()
+                auth.logout(request)
                 args['pwd_change_success'] = 1
                 return render_to_response('profile_change_info.html', args)
             else:
@@ -164,6 +164,7 @@ def change_password(request):
         else:
             return redirect("/")
 
+    args['username']=user.username
     return render_to_response('password.html', args)
 
 def email_confirm(request, activation_key):
