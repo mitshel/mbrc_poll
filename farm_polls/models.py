@@ -7,9 +7,10 @@ from mbrc_profile.models import specialize, UserProfile
 ANSWER_TYPE_CHOICES =(
     (1,'Radio button'),
     (2,'Checkbox'),
-    (3,'Integer inputfield'),
-    (4,'String inputfield'),
-    (5,'ComboBox'),
+    (3,'Checkbox limited'),
+    (4,'Integer inputfield'),
+    (5,'String inputfield'),
+    (6,'ComboBox'),
 )
 
 # Create your models here.
@@ -39,12 +40,17 @@ class question(models.Model):
     poll = models.ForeignKey(poll)
     name = models.CharField(max_length=256)
     pos = models.IntegerField(null=True, blank=True)
-    answer_type = models.IntegerField(default=1, choices=ANSWER_TYPE_CHOICES)
-    checkbox_csv = models.CharField(max_length=256, null=True)
+    answer_type = models.IntegerField(default=1, choices=ANSWER_TYPE_CHOICES)    # Коакого типа могут быть ответы
+    checkbox_limit = models.IntegerField(null=True, blank=True)
+    combobox_csv = models.CharField(max_length=256, null=True, blank=True)                   # Здесь разделенные через ";" варианты выбора в combobox
+
     def __str__(self):
         return self.name
 
-class anketa_reslut(models.model):
+    class Meta:
+            ordering = ['pos']
+
+class anketa_reslut(models.Model):
     """ Результаты опроса, привязанные к зарегистрированному пользователю """
     user = models.ForeignKey(User, null=True)
     anketa = models.ForeignKey(anketa)                              # Ссылка на анкету
@@ -59,15 +65,15 @@ class anketa_reslut(models.model):
     pay_cost  = models.IntegerField(default=0)                      # Сколько денег было перечислено
     pay_time  = models.DateTimeField(null=True)                     # Дата и время выплаты
 
-class poll_result(models.model):
+class poll_result(models.Model):
     """Результаты опроса внутри анкеты"""
     anketa_result = models.ForeignKey(anketa_reslut)
     poll = models.ForeignKey(poll)
-    question_sequence = models.CharField(max_length=1024)
+    question_sequence = models.CharField(max_length=1024)           # Порядок следования вопросов (question_id) разделенные ";"
 
 
-class preparat_result(models.model):
+class preparat_result(models.Model):
     """ Результаты заполнения опроса по конкретному препарату"""
     poll_result = models.ForeignKey(poll_result)
     preparat = models.ForeignKey(preparat)
-    result_sequence = models.CharField(max_length=1024)
+    result_sequence = models.CharField(max_length=1024)             # Содержание ответов разделенные знаком ";"

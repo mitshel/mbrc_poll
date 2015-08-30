@@ -5,15 +5,16 @@ from django.contrib import auth
 from django.contrib.auth.models import User, AnonymousUser
 from django.core.context_processors import csrf
 from .forms import RegForm, ProfileForm, PasswordForm
-from django.db  import IntegrityError
+from django.db import IntegrityError
 from .sms import send_sms_confirmation
 from mbrc_profile.models import specialize, UserProfile
 from mbrc_profile.email import send_email_confirmation, ACTIVATION_PERIOD_HOURS
 import datetime
 from django.utils import timezone
+from django.template import Context, RequestContext
 
 def login(request):
-    args = {}
+    args = RequestContext(request)
     args.update(csrf(request))
     if request.POST:
         username = request.POST.get('username', '')
@@ -53,7 +54,7 @@ def logout(request):
     return redirect("/")
 
 def register(request):
-    args = {}
+    args = RequestContext(request)
     args.update(csrf(request))
     args['form'] = RegForm()
     if request.POST:
@@ -93,7 +94,7 @@ def register(request):
     return render_to_response('register.html', args)
 
 def edit_profile(request):
-    args = {}
+    args = RequestContext(request)
     user=auth.get_user(request)
     args['username']=user.username
     user_profile=UserProfile.objects.get(uid=user)
@@ -135,7 +136,7 @@ def edit_profile(request):
 
 
 def change_password(request):
-    args = {}
+    args = RequestContext(request)
     user=auth.get_user(request)
     user_profile=UserProfile.objects.get(uid=user)
     args.update(csrf(request))
@@ -168,7 +169,7 @@ def change_password(request):
     return render_to_response('password.html', args)
 
 def email_confirm(request, activation_key):
-    args = {}
+    args = RequestContext(request)
     #check if user is already logged in and if he is redirect him to some other url, e.g. home
     if request.user.is_authenticated():
         redirect('/')
@@ -200,7 +201,7 @@ def email_confirm(request, activation_key):
 
 
 def sms_confirm(request, send_sms=0):
-    args = {}
+    args = RequestContext(request)
     args.update(csrf(request))
     user=auth.get_user(request)
     args['username']=user.username

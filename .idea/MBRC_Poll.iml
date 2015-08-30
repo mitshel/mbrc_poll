@@ -21,7 +21,8 @@
       <list>
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/polls/templates" />
-        <option value="$MODULE_DIR$/loginsys/templates" />
+        <option value="$MODULE_DIR$/farm_polls/templates" />
+        <option value="$MODULE_DIR$/mbrc_profile/templates" />
       </list>
     </option>
   </component>

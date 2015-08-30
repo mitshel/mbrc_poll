@@ -1,7 +1,8 @@
 {% extends 'main.html' %}
 
 {% block login %}
-    <div class="large-offset-3 large-6 columns">
+    <div id="loginModal" class="reveal-modal small" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <!-- <div class="large-offset-3 large-6 columns"> -->
         <p></p>
         <h3>Подтверждение регистрации для пользователя {{ username_confirm }}.</h3>
 
@@ -27,6 +28,12 @@
                 {% endif %}
             </p>
             </div>
-
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
     </div>
+{% endblock %}
+
+{% block login-js %}
+    <script>
+        $('#loginModal').foundation('reveal', 'open');
+    </script>
 {% endblock %}

@@ -9,7 +9,7 @@ TEMPLATE_EMAIL_BODY = "Здравствуйте %s, благодарим за р
                       "Для активации Вашего аккаунта перейдите по ссылке ниже в течение 48 часов \n " \
                       "http://127.0.0.1:8000/auth/email_confirm/%s/"
 EMAIL_FROM = 'mitshel@mail.ru'
-ACTIVATION_PERIOD_HOURS = 48
+ACTIVATION_PERIOD_HOURS = 360
 
 def send_email_confirmation(user_profile):
             email = user_profile.uid.username
