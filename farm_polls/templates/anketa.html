@@ -1,0 +1,46 @@
+{% extends "main.html" %}
+{% load staticfiles %}
+
+{% block title %}Сайт анкетирования компании MBRC{% endblock %}
+{% block content %}
+    <p>{{ poll }}</p>
+    <table>
+    <thead>
+        <td>Препарат/Компания</td>
+        {% for q in questions %}
+            <td>{{ q }}</td>
+        {% endfor %}
+    </thead>
+    {%  for pr in preparats %}
+    <tr>
+        <td>{{ pr }}</td>
+        {% for q in questions %}
+            <td>
+            {% if q.answer_type == 1 %}
+                <input type="radio"/>
+            {% elif q.answer_type == 2 or q.answer_type == 3 %}
+                <input type="checkbox"/>
+            {% elif q.answer_type == 4 %}
+                <input type="text"/>
+            {% elif q.answer_type == 5 %}
+                <input type="number"/>
+            {% elif q.answer_type == 6 %}
+                <select name="combo">
+                <option>1</option>
+                <option>2</option>
+                </select>
+            {% else %}
+            {% endif %}
+            </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
+
+    (1,'Radio button'),
+    (2,'Checkbox'),
+    (3,'Checkbox limited'),
+    (4,'Integer inputfield'),
+    (5,'String inputfield'),
+    (6,'ComboBox'),

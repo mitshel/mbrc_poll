@@ -18,7 +18,7 @@
     <h3 class="text-center">Список доступных анкет для Вашей специализации:</h3>
     <ul>
     {% for anketa in list %}
-        <li><a href="{{ anketa.id }}/">{{ anketa.name }}</a></li>
+        <li><a href="anketa/{{ anketa.id }}/">{{ anketa.name }}</a></li>
     {% endfor %}
     </ul>
     </div>

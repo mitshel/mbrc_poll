@@ -22,6 +22,6 @@ urlpatterns = [
 #    url(r'^hello/$',hello),
 #    url(r'^time/plus/(\d{1,2})/$',hours_ahead),
 #    url(r'^',hours_ahead),
-    url(r'^poll/',include('farm_polls.urls')),
+    url(r'^anketa/',include('farm_polls.urls')),
     url(r'^',include('farm_polls.urls')),
 ]

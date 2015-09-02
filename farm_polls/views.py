@@ -4,7 +4,7 @@ from django.http import Http404, HttpResponse
 from django.template import Context, RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.contrib import auth
-from farm_polls.models import anketa
+from farm_polls.models import anketa, poll, question, preparat
 from mbrc_profile.models import specialize, UserProfile
 from django.contrib.auth.models import User, AnonymousUser
 
@@ -31,14 +31,23 @@ def anketa_list(request):
 
 def anketa_show(request, id=0):
     args = RequestContext(request)
+    user=auth.get_user(request)
+    if not user.is_authenticated():
+        return render_to_response('hello.html', args)
+    args['username']=user.username
     try:
         canketa=anketa.objects.get(id=id)
     except anketa.DoesNotExist:
         args['alert_message']='Ошибка. Анкета не существует.'
         args['alert_type']='alert'
-        raise Http404()
+#        raise Http404()
         return render_to_response('error.html',args)
 
-    args['alert_message']='Ошибка. Функционал в разработке.'
-    args['alert_type']='info'
-    return render_to_response('error.html', args)
+    p = poll.objects.filter(anketa=canketa)
+    q = question.objects.filter(poll=p[0])
+    pr = preparat.objects.filter(poll=p[0])
+    args['poll']=p[0].name
+    args['questions']=q
+    args['preparats']=pr
+
+    return render_to_response('anketa.html', args)
