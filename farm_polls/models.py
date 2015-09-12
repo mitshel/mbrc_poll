@@ -42,7 +42,7 @@ class question(models.Model):
     pos = models.IntegerField(null=True, blank=True)
     answer_type = models.IntegerField(default=1, choices=ANSWER_TYPE_CHOICES)    # Коакого типа могут быть ответы
     checkbox_limit = models.IntegerField(null=True, blank=True)
-    combobox_csv = models.CharField(max_length=256, null=True, blank=True)                   # Здесь разделенные через ";" варианты выбора в combobox
+    combobox_csv = models.CharField(max_length=256, null=True, blank=True, )                   # Здесь разделенные через ";" варианты выбора в combobox
 
     def __str__(self):
         return self.name
@@ -50,7 +50,7 @@ class question(models.Model):
     class Meta:
             ordering = ['pos']
 
-class anketa_reslut(models.Model):
+class anketa_result(models.Model):
     """ Результаты опроса, привязанные к зарегистрированному пользователю """
     user = models.ForeignKey(User, null=True)
     anketa = models.ForeignKey(anketa)                              # Ссылка на анкету
@@ -64,12 +64,13 @@ class anketa_reslut(models.Model):
     pay_phone = models.CharField(max_length=10, null=True)          # № телефона на который произведена оплата
     pay_cost  = models.IntegerField(default=0)                      # Сколько денег было перечислено
     pay_time  = models.DateTimeField(null=True)                     # Дата и время выплаты
+    json_data = models.TextField(null=True, blank=True)
 
 class poll_result(models.Model):
     """Результаты опроса внутри анкеты"""
-    anketa_result = models.ForeignKey(anketa_reslut)
+    anketa_result = models.ForeignKey(anketa_result)
     poll = models.ForeignKey(poll)
-    question_sequence = models.CharField(max_length=1024)           # Порядок следования вопросов (question_id) разделенные ";"
+    json_data = models.TextField(null=True, blank=True)
 
 
 class preparat_result(models.Model):

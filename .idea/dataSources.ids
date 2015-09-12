@@ -48,7 +48,7 @@
       <exported-key name="#FAKE_auth_user_groups_2" table="auth_user_groups" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_auth_user_user_permissions_2" table="auth_user_user_permissions" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_django_admin_log_1" table="django_admin_log" schema="" catalog="" columns="user_id"/>
-      <exported-key name="#FAKE_farm_polls_anketa_reslut_1" table="farm_polls_anketa_reslut" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_farm_polls_anketa_result_1" table="farm_polls_anketa_result" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_mbrc_profile_userprofile_1" table="mbrc_profile_userprofile" schema="" catalog="" columns="uid_id"/>
       <exported-key name="#FAKE_polls_polls_results_1" table="polls_polls_results" schema="" catalog="" columns="uid_id"/>
       <exported-key name="#FAKE_registration_registrationprofile_1" table="registration_registrationprofile" schema="" catalog="" columns="user_id"/>
@@ -122,11 +122,11 @@
       <column name="specialize_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_farm_polls_anketa_1" columns="specialize_id" ref-table="mbrc_profile_specialize" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <exported-key name="#FAKE_farm_polls_anketa_reslut_2" table="farm_polls_anketa_reslut" schema="" catalog="" columns="anketa_id"/>
+      <exported-key name="#FAKE_farm_polls_anketa_result_2" table="farm_polls_anketa_result" schema="" catalog="" columns="anketa_id"/>
       <exported-key name="#FAKE_farm_polls_poll_1" table="farm_polls_poll" schema="" catalog="" columns="anketa_id"/>
       <index name="farm_polls_anketa_f942ee46" unique="true" columns="specialize_id"/>
     </table>
-    <table name="farm_polls_anketa_reslut" schema="" catalog="" type="TABLE">
+    <table name="farm_polls_anketa_result" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="code" sqlType="VARCHAR(8)" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
       <column name="a_start" sqlType="DATETIME" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
@@ -141,11 +141,11 @@
       <column name="anketa_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="true" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_farm_polls_anketa_reslut_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_farm_polls_anketa_reslut_2" columns="anketa_id" ref-table="farm_polls_anketa" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <exported-key name="#FAKE_farm_polls_poll_result_2" table="farm_polls_poll_result" schema="" catalog="" columns="anketa_result_id"/>
-      <index name="farm_polls_anketa_reslut_e8701ad4" unique="true" columns="user_id"/>
-      <index name="farm_polls_anketa_reslut_3ce7eb63" unique="true" columns="anketa_id"/>
+      <foreign-key name="#FAKE_farm_polls_anketa_result_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_farm_polls_anketa_result_2" columns="anketa_id" ref-table="farm_polls_anketa" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_farm_polls_poll_result_1" table="farm_polls_poll_result" schema="" catalog="" columns="anketa_result_id"/>
+      <index name="farm_polls_anketa_result_e8701ad4" unique="true" columns="user_id"/>
+      <index name="farm_polls_anketa_result_3ce7eb63" unique="true" columns="anketa_id"/>
     </table>
     <table name="farm_polls_poll" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -153,7 +153,7 @@
       <column name="anketa_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
       <foreign-key name="#FAKE_farm_polls_poll_1" columns="anketa_id" ref-table="farm_polls_anketa" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <exported-key name="#FAKE_farm_polls_poll_result_1" table="farm_polls_poll_result" schema="" catalog="" columns="poll_id"/>
+      <exported-key name="#FAKE_farm_polls_poll_result_2" table="farm_polls_poll_result" schema="" catalog="" columns="poll_id"/>
       <exported-key name="#FAKE_farm_polls_preparat_1" table="farm_polls_preparat" schema="" catalog="" columns="poll_id"/>
       <exported-key name="#FAKE_farm_polls_question_1" table="farm_polls_question" schema="" catalog="" columns="poll_id"/>
       <index name="farm_polls_poll_3ce7eb63" unique="true" columns="anketa_id"/>
@@ -161,14 +161,14 @@
     <table name="farm_polls_poll_result" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="question_sequence" sqlType="VARCHAR(1024)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
-      <column name="anketa_result_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <column name="poll_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="anketa_result_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
       <primary-key columns="id"/>
-      <foreign-key name="#FAKE_farm_polls_poll_result_1" columns="poll_id" ref-table="farm_polls_poll" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
-      <foreign-key name="#FAKE_farm_polls_poll_result_2" columns="anketa_result_id" ref-table="farm_polls_anketa_reslut" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_farm_polls_poll_result_1" columns="anketa_result_id" ref-table="farm_polls_anketa_result" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_farm_polls_poll_result_2" columns="poll_id" ref-table="farm_polls_poll" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
       <exported-key name="#FAKE_farm_polls_preparat_result_2" table="farm_polls_preparat_result" schema="" catalog="" columns="poll_result_id"/>
-      <index name="farm_polls_poll_result_582e9e5a" unique="true" columns="poll_id"/>
       <index name="farm_polls_poll_result_3903efc6" unique="true" columns="anketa_result_id"/>
+      <index name="farm_polls_poll_result_582e9e5a" unique="true" columns="poll_id"/>
     </table>
     <table name="farm_polls_preparat" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>

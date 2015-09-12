@@ -1,0 +1,3 @@
+Избавится от "Хардкора" URL-ов в шаблонах
+http://djbook.ru/rel1.8/intro/tutorial03.html#removing-hardcoded-urls-in-templates
+
