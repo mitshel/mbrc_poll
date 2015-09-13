@@ -23,7 +23,7 @@
             {% if q.answer_type == 1 %}
                 <input type="radio" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}">
             {% elif q.answer_type == 2 or q.answer_type == 3 %}
-                <input type="checkbox" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}" v="{{ data|get_item:q.id }}">
+                <input type="checkbox" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}" {% poll_data data q.id pr.id q.answer_type %}>
             {% elif q.answer_type == 4 %}
                 <input type="number" style="height: 24px; width: 80%; padding: 2px 2px; margin: 2px;" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}">
             {% elif q.answer_type == 5 %}

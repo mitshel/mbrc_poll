@@ -107,7 +107,8 @@ def anketa_show(request, anketa_id=-1, poll_id=-1):
         except:
             json_dict={}
 
-        args['data']=json_dict.get(cpoll.id)
+        args['data']=json_dict.get('%s'%cpoll.id)
+        #raise
 
     return render_to_response('anketa.html', args)
 
@@ -144,10 +145,10 @@ def poll_save(request, poll_id=-1):
                 id_name='q%spr%s'%(q.id,p.id)
                 value = request.POST.get(id_name, '')
                 if value!='':
-                    pr_dict[p.id] = value
-            query_dict[q.id] = pr_dict
+                    pr_dict['%s'%p.id] = '%s'%value
+            query_dict['%s'%q.id] = pr_dict
         if query_dict!={}:
-            json_dict[cpoll.id]=query_dict
+            json_dict['%s'%cpoll.id]=query_dict
 
         json_data=json.dumps(json_dict)
         ca_res.json_data=json_data
