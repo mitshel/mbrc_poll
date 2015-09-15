@@ -21,17 +21,17 @@
         {% for q in questions %}
             <td style="text-align: center; vertical-align: middle; padding: 5px;">
             {% if q.answer_type == 1 %}
-                <input type="radio" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}">
+                <input type="radio" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr0" value="{{ pr.id }}" {% poll_data data q.id pr.id q.answer_type %}>
             {% elif q.answer_type == 2 or q.answer_type == 3 %}
-                <input type="checkbox" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}" {% poll_data data q.id pr.id q.answer_type %}>
+                <input type="checkbox" class="checkbox-q{{ q.id }}" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}" {% poll_data data q.id pr.id q.answer_type %}>
             {% elif q.answer_type == 4 %}
-                <input type="number" style="height: 24px; width: 80%; padding: 2px 2px; margin: 2px;" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}">
+                <input type="number" style="height: 24px; width: 80%; padding: 2px 2px; margin: 2px;" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}" {% poll_data data q.id pr.id q.answer_type %}>
             {% elif q.answer_type == 5 %}
-                <input type="text" style="height: 24px; width: 80%; padding: 2px 2px; margin: 2px;" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}">
+                <input type="text" style="height: 24px; width: 80%; padding: 2px 2px; margin: 2px;" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}" {% poll_data data q.id pr.id q.answer_type %}>
             {% elif q.answer_type == 6 %}
                 <select style="height: 24px; padding: 2px 2px" id="q{{ q.id }}pr{{ pr.id }}" name="q{{ q.id }}pr{{ pr.id }}">
                 {% for item in q.combobox_csv.split %}
-                    <option>{{ item }}</option>
+                    <option {% poll_data_selected data q.id pr.id item %}>{{ item }}</option>
                 {% endfor %}
                 </select>
             {% else %}
@@ -60,4 +60,17 @@
         {% endif %}
     </ul>
     </div>
+{% endblock %}
+
+{% block block-js %}
+<script>
+$(document).ready(function() {
+    {% for q in questions %}
+        {% if q.answer_type ==  3 %}
+            $("input.checkbox-q{{ q.id }}").click(function() {
+                if ($("input.checkbox-q{{ q.id }}:checked").length > {{ q.checkbox_limit }}) this.checked = false; });
+        {% endif %}
+    {% endfor %}
+});
+</script>
 {% endblock %}

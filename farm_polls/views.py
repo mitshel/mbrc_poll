@@ -141,6 +141,12 @@ def poll_save(request, poll_id=-1):
         query_dict={}
         for q in cquestion:
             pr_dict={}
+            # pr0 это общее имя для все radiobutton
+            id_name='q%spr0'%(q.id)
+            value = request.POST.get(id_name, '')
+            if value!='':
+                pr_dict['0'] = '%s'%value
+
             for p in cpr:
                 id_name='q%spr%s'%(q.id,p.id)
                 value = request.POST.get(id_name, '')
